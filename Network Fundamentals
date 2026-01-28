@@ -1,0 +1,45 @@
+--Intro to LAN--
+
+Topologies:
+Star - devices connect to central network device like switch/hub
+  Reliable and scalable
+  Most expensive
+
+Bus - Backbone cable used for traffic between all devices
+  Easier and cost-efficient
+  Little redundancy/single point of failure, prone to bottlenecking
+
+Ring (Token) - Devices directly connect to each other to form a loop, sending data across loop until it reaches destination
+  Devices will send their own data before sending received data
+  Little cabling and less dependence on dedicated hardware
+  Less prone to bottle necks
+  Little redundnacy - one cable cut/device failure brings whole network down
+
+Primer on subnetting:
+Subnetting - splitting network inot smaller, miniature networks within itself
+  Achieved by splitting up number of hosts that can fit within the network, represented by SUBNET MASK
+
+Subnets use IP addresses in 3 different ways:
+ID the NETWORK ADDRESS - address IDs the start of the actual network and is used to identify a networks existence
+ID the HOST ADDRESS - An IP address here is used to identify a device on the subnet
+ID the DEFAULT GATEWAY - a special address assigned ot a device on the network capable of sending info to another network
+
+ARP:
+Address Resolution Protocol - allows devices to identify themselves on a network by associating its MAC with IP address
+
+When devices communicate to each other, they will send abroadcast to entire network searching for specific device via ARP for MAC address.
+
+ARP cache- stores identifiers of other devices on network
+
+ARP Request - broadcasted message asks what MAC owns this IP?
+ARP Reply - device that owns the requested IP responds with its MAC address
+
+DHCP:
+Dynamic Host Configuration Protocol
+When a device connects to a network, if it doesn't have a manually assigned IP, it uses DORA:
+DHCP DISCOVER - request to find DHCP server
+DHCP OFFER - DHCP server replies with a usable IP
+DHCP REQUEST - Device confirms it wants the usable IP
+DHCP ACK - DHCP server send reply ACKnowledging it has been completed, and device can start using the IP
+
+--OSI MODEL--
