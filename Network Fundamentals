@@ -43,3 +43,65 @@ DHCP REQUEST - Device confirms it wants the usable IP
 DHCP ACK - DHCP server send reply ACKnowledging it has been completed, and device can start using the IP
 
 --OSI MODEL--
+Open Systems Interconnection Model - 7 layer framework dictating how networked devices send/receive/interpret data
+
+Encapsulation - pieces of info get added to data
+
+1) Physical
+Physical componenets of hardware used in networking.
+Devices use electrical signals to transfer data betwwen each other in binary
+
+2) Data Link
+Focuses on physical addressing of transmission.
+Received packet from network layer (including IP) and adds in the physical MAC address of the receiving endpoint.
+Inside every network-enabled computer there is a NIC which comes with a unique MAC
+Presents data in a format suitable for transmission
+
+3) Network
+Routing determines optimal path for data
+OSPF - Open Shortest Path First
+RIP - Routing Information Protocol
+Factors that device the taken route:
+  What path has least hops (shortest distance)
+  What path is most reliable (have packets been lost on this path before)
+  Which path has faster physical connection
+Everything is dealt with via IP address.
+
+4) Transport
+Data uses TCP or UDP protocols to send.
+TCP - Transmission Control Protocol
+Pros:
+  Guarantees accuracy of data
+  Capable of synchronizing 2 devices to prevent each other from being flooded with data
+  Performs a lot more processes for reliability
+Cons:
+  Requires reliable connection between devices.
+  Slow connection can bottleneck another device since connection is reserved on receiving device the whole time
+  Significaly slower than UDP
+
+UDP - User Datagram Protocol
+Pros:
+  Much faster
+  UDP leaves application layer (user software) to decide if there is any control over how quickly packets are sent
+  UDP does not reserve continuous connection
+Cons:
+  UDP doesn't care if data is received
+  It is quite flexible to software developers
+  Unstable connections result in terrible user experience
+
+5) Session
+Creates and maintains connection to other destination computer. When connection is established, a session is created.
+Session layer also closes connection.
+A session can contain "checkpoints" where if the data is lost, only the newest pieces of data are required to be sent, saving bandwidth.
+
+6) Presentation
+Translates data to and from Application layer (7). 
+Security features such as data encryption (like HTTPS) occur at this layer
+
+7) Application
+Layer in which protocols and rules are in place to determine how the user should interact with data sent/received
+GUIs are used to interact with.
+DNS is at this layer?
+
+
+--Packets and Frames--
