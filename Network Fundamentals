@@ -104,4 +104,100 @@ GUIs are used to interact with.
 DNS is at this layer?
 
 
---Packets and Frames--
+---Packets and Frames---
+
+Packet - L3 (Network) data containing info like IP header and payload (contents)
+Frame - L2 (Data Link) data encapsulates the packet and adds additional info like MAC (envelope)
+
+This process is encapsulation. When encapsulating info is stirpped away, we're talking about the frame.
+
+Because data is exchanged in small pieces, there's less chance of bottlenecking
+
+Notable IP packet headers:
+  TTL - expiry timer for packet to not clog up network if it never reaches host/escapes
+  Checksum - integrity checking for protocols like TCP/IP. If any data changes, this value changes from what is expected and therefore corrupt
+  Source Address - IP address of device SENDING packet so that data knows where to RETURN TO
+  Destination Address - devices IP the packet is being SENT TO so data knows where to travel next
+
+--TCP/IP (3 way handshake)--
+Consists of 4 layers:
+  Application
+  Transport
+  Internet
+  Network Interface
+
+Info is added to each layer of the TCP model as the packet traverses it. (ENCAPSULATION)
+Info taken away is DECAPSULATION
+
+TCP is CONNECTION-BASED, which means TCP much establlish connection before data is sent
+This gaurantees any data sent will be received.
+Pros:
+  Guarantees integrity of data
+  Capable of syncing 2 devices to prevent each other from being flooded with data in wrong order
+  Performs a lot more processes for reliablity
+Cons:
+  Requires reliable connection. If one small chunk of data is not received, then the entire chunk cannot be used and must be re-sent
+  Slow connection can bottleneck another device since connection is reserved the whole time
+  TCP is significantly slower than UDP because more computing is done.
+
+Crucial TCP headers:
+  Source Port - this value is the port opened by the sender to send the TCP packet FROM. (randomly chosen value)
+  Destination Port - Port number that an app or service is running on the receiving host. (not random)
+  Source IP - IP of sender
+  Destination IP - IP of receiver
+  Sequence number - when connection occurs, the first piece of data transmitted is given a random number
+  ACKnowledgement number - After given a sequence number, next piece of data will have sequence number +1.
+  Checksum - TCP integrity. Calculation is made where the output is remembered. When receiving device performs the calculation, the data must be corrupt if output is different than what was sent.
+  Data - stored data (i.e. bytes of a file)
+  Flag - header determines how the packet should be handled during handshake.
+
+--3 WAY HANDSHAKE--
+  1) SYN - initial packet sent by client to initiaite connection
+  2) SYN/ACK - packet sent by receiving device (server) to acknowledge connection attempt
+  3) ACK - packet can be used by client or server to acknowledge that a series of messages/packets have been successfully received
+
+  4) DATA - Once connected, data (such as file bytes) is sent via the DATA message
+  5) FIN - Properly closes connection
+  6) RST - packet abruptly ends all communication. last resort and indicates a problem in the process.
+
+Best practice to close TCP connections ASAP.
+To initiate closure of TCP connection, device sends FIN packet to other deivce, which the other device has to acknowledge the packet
+FIN > ACK
+FIN < ACK
+
+--UDP/IP--
+User Datagram Protocol - stateless protocol that doesn't reqiure constant connection
+
+Pros:
+  Much faster than TCP
+  UDP leaves the app (software) to decide if there is any control over how quickly packets are sent
+  UDP does not reserve a continuous connection
+
+Cons:
+  UDP doesn't care if data is received or not
+  It is quite flexible to software developers
+  This means unstable connections result in terrible user experience
+
+UDP Packet Headers:
+  TTL
+  Source Address
+  Destination Address
+  Source Port
+  Destination Port
+  Data
+
+Bob REQUEST > Alice
+Alice RESPONSE > Bob
+
+--PORTS 101--
+Any port between 0-1024 is a common port.
+
+FTP - 21 - File sharing app built on client-server model
+Secure Shell SSH - 22 - Secure login to systems via text-based interface for management
+HyperText Transfer Protocol HTTP - 80 - Browser uses this to download text/images/videos of web pages
+HyperText Transfer Protocol Secure HTTPS - 443 - Does this^ securely with encryption
+Server Message Block SMB - 445 - similar to FTP, allows share of devices like printers
+Remote Desktop Protocol RDP - 3389 - Secure means of logging into system using visual desktop interface
+
+These protocols only follow the standards. I.E. you can administer apps that interact with these protocols ona  different port other than what is the stnadard (web server on 8080 instead of the 80 standard port)
+Apps will presume that the standard is being followed, so you wll have to provide a COLON (:) along with the port number.
