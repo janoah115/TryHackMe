@@ -1,3 +1,58 @@
 ---EXTENDING YOUR NETWORK---
 
-tbc
+--Intro to Port Forwarding--
+Port Forwarding - opens specific ports to connect apps/services to the internet.
+
+--Firewalls 101--
+Firewall - device within network to determine what traffic is allowed to enter/exit.
+  1)where is the traffic coming from? (accept/deny from a specific network)
+  2) where is traffic going to? (accept/deny traffic destined for specific network)
+  3) What port is traffic for (accept/deny based on specific port)
+  4) What protocol is traffic using? (accept/deny traffic that is UDP, TCP, or both)
+
+Firewalls perform packet inspection to determine answers to these questions.
+
+Dedicated pieces of hardware or software
+
+2 Categories:
+1) Stateful - uses entire info from connection, rather than individual packet
+    Consumes many resources in comparios to stateless FWs
+    If host connection is bad, it will block the entire device
+2) Stateless - static rules to determine whether or not INDIVIDUAL PACKETS are acceptable or not.
+    If sending device sends a bad packet, will not necessarily mean entire device is blocked
+    Dumber than Stateful FWs
+    Great when receiving large amounts of traffic from a set of hosts (DDoS)
+
+--VPN basics--
+Virtual Private Network - allows devices on separate networks to communicate securely by creating a tunnel over the internet. Devices within the tunnel form their own private network.
+
+Pros:
+  Allows networks in different geographical locations to be connected
+  Offers privacy. Encryption prevents sniffing, traffic only understood between devices in tunnel.
+  Offers anonymity. 
+
+VPN technologies:
+  PPP - allows for authentication and provide encryption of data. Pirvate key and certificate must match to connect.
+    non-routable; cannot leave network by itself
+  PPTP - Point-to-Point Tunneling Protocol - allows data from PPP to travel and leave the network
+    Weakly encrypted, easy to set up
+  IPSec - Internet Protocol Security - encrypts data using the existing IP framework.
+    Strong encryption, difficult to set up
+
+--LAN Networking Devices--
+Routing - data travelling across networks by creating a path between networks for delivery.
+  L3 of OSI
+  Often feature an interactive interface for configuration
+
+Routing path factors:
+  Shortest path
+  Most reliable
+  Fasest medium (copper/fiber)
+
+Switches - connects multiple devices via ethernet cables.
+  Can operate at L2 and L3 of OSI, these are exclusive (L2 cannot operate L3)
+  Soley resposible for sending frames to correct device
+
+L3 Switches - send frames to devices (as L2 does) and route packets to other devices using the IP protocol
+
+VLAN - Virtual Local Area Network - allows specific devices with a network to be virtually split up.
