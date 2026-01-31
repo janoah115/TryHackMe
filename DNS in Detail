@@ -1,0 +1,49 @@
+---DNS IN DETAIL---
+
+DNS - Domain name System - protocol that resolves hostnames to their respective IP address
+
+--Domain Hierarchy--
+TLD - Top-Level Domain - most righthand part of domain name - tryhackme.COM
+
+2 types of TLD
+1) gTLD (Generic Top Level) - tells user domain names purpose - .com commercial, .org organization
+2) ccTLD (Country Code Top Level Domain) - geographical - .ca  Canada, .uk  United Kingdom
+
+Second-Level Domain - before .com - TRYHACKME.com
+  Limited to 63 characters + TLD and can only use a-z 0-9 and hyphens
+
+Subdomain - left side of Second-Level Domain using a . to separate - ADMIN.tracyhackme.com
+  Length must be 253 characters or less
+
+--Record Types--
+
+A Record - resolve to IPv4 address
+AAAA Record - resolves to IPv6 address
+CNAME Record - resolve to another domain name
+  store.tryhackme.com returns CNAME record shops.shopify.com
+  Another DNS request would then be made to shops.shopify.com to work out the IP
+MX Record - resolve to address of servers that handle the email for the domain you are querying
+  MX Record response for tryhackme.com would look like alt1.aspmx.l.google.com
+  These records also come with a PRIORITY FLAG - tells the client in which order to try the servers.
+      Good for backup server redundancy
+TXT Record - free text fields where any text-based data can be stored
+  Common use can be to list servers that have authority to send an email on behalf of the domain
+    Helps against spam and spoofed email
+  Can also verify ownership of domain name when signing up for third party services
+
+--Making a Request--
+1) When requesting domain name, computer checks local cache to see if you've previously looked up the address recently.
+  If not, a request to your RECURSIVE DNS server will be made
+2) Recursive DNS server usually provided by ISP that has a local cache of recently searched domain names.
+  If result is found locally, sent back to computer, and request ends here
+  If not found locally, journey begins to find correct answer, starting with internets root DNS servers.
+3) Root Servers - DNS backbone of the internet - redirect you to correct TLD server, depending on your request.
+  If searching www.tryhackme.com, root server will recognize the TLD of .com and refer you to the correct TLD server that handles .com addresses
+4) TLD Server - holds records for where to find authoriative server to answer DNS request.
+  AKA NAMESERVER for domain
+5) AUTHORITATIVE DNS server - responsible for storing DNS records for a particular domain name & where any updates to your domain name DNS records would be made.
+  Depending on record type, DNS record is sent back to RECURSIVE DNS server, where a local copy is cached for future requests and relayed back to original client that made the request
+  DNS records all come with a TTL value - how many seconds that the response should be saved for locally until you have to look it up again
+  Caching saves on having to make DNS request every time you communicate with a server
+
+CLIENT > RECURSIVE > ROOT > AUTHORITATIVE > CLIENT
