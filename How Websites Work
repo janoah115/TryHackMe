@@ -1,0 +1,65 @@
+---HOW WEBSITES WORK---
+
+When visiting a website, your browser makes a request to a web server asking for info about the page.
+It will respond with data that your browser uses to show the page.
+
+2 Major componenets:
+Front End (Client Side) - way that your browser renders website
+Back End (Server side) - a server that processes request and returns response
+
+--HTML--
+Websites are created using:
+HTML to build and definte structure
+CSS to add style
+Javascript to imprement interactive complex features
+
+HyperText Markup Language - language websites are written in
+Elements (AKA tags) are the building blocks of HTML pages and tells browser how to display content
+
+HTML structure has following componenets:
+
+The <!DOCTYPE html> defines that the page is a HTML5 document. This helps with standardisation across different browsers and tells the browser to use HTML5 to interpret the page.
+The <html> element is the root element of the HTML page - all other elements come after this element.
+The <head> element contains information about the page (such as the page title)
+The <body> element defines the HTML document's body; only content inside of the body is shown in the browser.
+The <h1> element defines a large heading
+The <p> element defines a paragraph
+There are many other elements (tags) used for different purposes. For example, there are tags for buttons (<button>), images (<img>), lists, and much more.
+
+Tags can contain attributes such as the class attribute which can be used to style an element (e.g. make the tag a different color) <p class="bold-text">, or the src attribute which is used on images to specify the location of an image: <img src="img/cat.jpg">.
+An element can have multiple attributes each with its own unique purpose, e.g., <p attribute1="value1" attribute2="value2">.
+
+Elements can also have an id attribute (<p id="example">), which is unique to the element
+Unlike the class attribute, where multiple elements can use the same class, an element must have different id's to identify them uniquely. 
+Element id's are used for styling and to identify it by JavaScript.
+
+--JavaScript--
+JS is used to control functionality of web pages.
+JS can dynamically update the page in real-time, giving functionality to change the style of a button when a particular event on the page occurs.
+
+JavaScript is added within the page source code and can be either loaded within <script> tags or can be included remotely with the src attribute: <script src="/location/of/javascript_file.js"></script>
+
+The following JavaScript code finds a HTML element on the page with the id of "demo" and changes the element's contents to "Hack the Planet" : 
+document.getElementById("demo").innerHTML = "Hack the Planet";
+
+HTML elements can also have events, such as "onclick" or "onhover" to execute JS when the event occurs.
+ The following code changes the text of the element with the demo ID to Button Clicked: 
+<button onclick='document.getElementById("demo").innerHTML = "Button Clicked";'>Click Me!</button> - onclick events can also be defined inside the JavaScript script tags, and not on elements directly. 
+
+--Sensitive Data Exposure--
+Occurs when website doesn't properly protect/remove sensitive clear-text info to end-user, usually found in frontend source code.
+
+Sensitive info can be leveraged to further an attacker's access within different parts of a web app.
+For example, there could be HTML coments with temp login credentials.
+
+When assessing a web app for security issues, one of the FIRST things yuo should do is review page source code for exposed login credentials or hidden links
+
+--HTML Injection--
+Vulenerability that occurs when unfiltered user input is displayed on the page.
+If a website fails to sanitize the input (filter any "malicious" texst that a user inputs), and that input is used on the page, an attacker can inject HTML code
+
+1) User types info into input field
+2) Input used in JS function to show the name to the page
+3) No input is sanitized, so you can write your own HTML or JS and it will be used on the page
+
+General rule is to never trust user input. Should always be santized before using it in JS
