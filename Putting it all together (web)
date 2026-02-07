@@ -1,0 +1,71 @@
+---Putting it all together (web)---
+
+Summary:
+Request website in your browser > Find web server IP address with DNS > Connect to webserver > View website
+
+--Other Components--
+
+-Load Balancers-
+Ensures high traffic websites can handle the load
+Provides failover if server becomes unresponsive
+
+Round-robin algorithm - sends request to each server in turn
+Weighted algorithm - checks how many requests a server is currently dealing with and sends to least busy
+
+Periodic health checks - if server doesn't respond, balancer will stop sending traffic until it does
+
+-CDN (Content Delivery Networks)-
+Allows to host static files from website (JS, CSS, Images, Videos) and host them across thousands of servers all over the world.
+CDN sends from nearest server
+
+-Databases-
+Stores info
+MySQL, MSSQL, MongoDB, Postgres, and more
+
+-WAF (Web App Firewall)-
+Sits between web request and web server to protect from hacking or DDoS attacks.
+Analyzes for common attack techniques and whether its from a real server or bot
+Checks for excessive requests using RATE LIMITING to defend DDoS
+
+--How Web Servers Work-- 
+-What is a web server?-
+Software that listens for incoming connections and uses HTTP to deliver web content to clients
+
+Common web server softwares:
+Apache, Nginx, IIS, and NodeJS.
+
+Web server delivers files from root directory, defined in software settings.
+  Nginx and Apache use /var/www/html in Linux
+  IIS uses C:/inetpub/wwwroot in Windows
+    If you requested example.com/picture.jpg, it would send the file /var/www/html/picture.jpg from local hard drive
+
+-Virtual Hosts-
+Hosting multiple websites with different domain names.
+Web server checks hostname requetsed from HTTP headers and matches that against virtual hsots (text-based config files)
+  If no match is found, default website is provided
+
+Virtual hosts can have their root directory mapped to different locations on the hard drive.
+
+-Static vs Dynamic content-
+Static never changes (pics, JS, CSS, etc.)
+Dynamic content could change with different requests.
+  Blog example
+    Homepage shows latest entries. New entry updates home page, making different results.
+These changes are done in Backend using programming and scripting languages.
+
+-Scripting and Backend Languages-
+Makes website interactive to users.
+Examples: PHP, Python, Ruby, NodeJS, Perl and more. 
+These languages can interact with databases, call external services, process data from uesr, and more
+
+http://example.com/index.php?name=adam
+
+If index.php was built like this:
+
+<html><body>Hello <?php echo $_GET["name"]; ?></body></html>
+
+It would output the following to the client:
+
+<html><body>Hello adam</body></html>
+
+Client doesn't see PHP code cause its on the Backend.
